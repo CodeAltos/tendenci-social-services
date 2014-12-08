@@ -28,9 +28,9 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/social_service_map.js"></script>
 <script type="text/javascript">
 $(window).load(function(){
-    profile_redirect = "{% url profile.index %}";
-    responder_redirect = "{% url social-services.responders %}";
-    disaster_redirect = "{% url social-services.relief_areas %}";
+    profile_redirect = "{% url 'profile.index' %}";
+    responder_redirect = "{% url 'social-services.responders' %}";
+    disaster_redirect = "{% url 'social-services.relief_areas' %}";
     window.parent.setTimeout(plotpoints({{ b_points }}, {{ r_points }}, {{ center }}), 0);
 });
 </script>

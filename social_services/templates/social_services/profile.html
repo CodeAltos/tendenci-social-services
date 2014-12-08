@@ -16,13 +16,13 @@
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/iconrow.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/profiles.css">
-<link type="text/css" href="{{ STATIC_URL }}css/jquery-ui/tabs/ui-1.8.tabs.css" rel="stylesheet" />	
+<link type="text/css" href="{{ STATIC_URL }}css/jquery-ui/tabs/ui-1.8.tabs.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ STATIC_URL }}css/social_services.css" />
 <style>
     .app-links{
         margin: 3px 5em 1em 5em;
     }
-    
+
 </style>
 {% endblock %}
 
@@ -44,7 +44,7 @@
 	<div id="t-view">
 	<div class="intro info">
 		<div class="profile-icon">
-			<a href="{% url profile.change_avatar  user_this.id %}">
+			<a href="{% url 'profile.change_avatar'  user_this.id %}">
 				{% avatar user_this 128 %}
 			</a>
 		</div>
@@ -76,12 +76,12 @@
 		{% endif %}
 
         {% if user_this.skillset and user_this.skillset.is_first_responder %}
-            <p class="capitalize">{% trans "first responder" %} - <a href="{% url user.skills user_this.username %}">{% trans "see skills" %}</a></p>
+            <p class="capitalize">{% trans "first responder" %} - <a href="{% url 'user.skills' user_this.username %}">{% trans "see skills" %}</a></p>
         {% endif %}
 
         {% if request.user == user_this or admin %}
         {% if content_counts.invoice > 0 %}
-            <p><a href="{% url invoice.search %}?search_criteria=owner_id&search_text={{ user_this.id }}&search_method=exact">{% trans "Invoices" %} ({{ content_counts.invoice }})</a></p>
+            <p><a href="{% url 'invoice.search' %}?search_criteria=owner_id&search_text={{ user_this.id }}&search_method=exact">{% trans "Invoices" %} ({{ content_counts.invoice }})</a></p>
         {% endif %}
         {% endif %}
 
@@ -121,39 +121,39 @@
             {% endif %}
 
 		</table>
-		
+
     </div>
-    
+
     {% if request.user.profile.is_superuser %}
     <div class="admin_notes info">
         <h2> Admin Notes </h2>
-        <p> 
-            {% if profile.admin_notes %} 
-                {{ profile.admin_notes }} 
+        <p>
+            {% if profile.admin_notes %}
+                {{ profile.admin_notes }}
             {% else %}
                 No admin notes.
             {% endif %}
         </p>
 	</div>
-    {% endif %} 
+    {% endif %}
 
     {% if request.user == user_this or request.user.profile.is_superuser %}
     {% if MODULE_MEMBERSHIPS_ENABLED %}
     <div class="membership info">
 
-		<h2>Memberships 
+		<h2>Memberships
 		{% if membership_apps %}
-    		<a title="Join membership" href="{% url membership_default.add membership_apps.0.slug %}?username={{ user_this.username }}" class="glyph plus{% if multiple_apps %} toggle-app-links{% endif %}">+</a>
+    		<a title="Join membership" href="{% url 'membership_default.add' membership_apps.0.slug %}?username={{ user_this.username }}" class="glyph plus{% if multiple_apps %} toggle-app-links{% endif %}">+</a>
     	{% else %}
-    	    <a title="Create a membership application" href="{% url admin:memberships_membershipapp_add %}" class="glyph plus">+</a>
+    	    <a title="Create a membership application" href="{% url 'admin:memberships_membershipapp_add' %}" class="glyph plus">+</a>
 		{% endif %}
 		</h2>
-		
+
 		{% if multiple_apps %}
 		  <div class="app-links">
 		  {% for app in membership_apps %}
 		      <div>
-		          <a title="Join membership" href="{% url membership_default.add app.slug %}">Join</a>
+		          <a title="Join membership" href="{% url 'membership_default.add' app.slug %}">Join</a>
 		          {{ app.name }}
 		      </div>
 		  {% endfor %}
@@ -166,7 +166,7 @@
         		<tr>
         			<td>
                         {% if request.user.profile.is_superuser %}
-        				 <a href="{% url membership.details membership.pk %}">{% trans "Member of" %} {{ membership.membership_type }}
+        				 <a href="{% url 'membership.details' membership.pk %}">{% trans "Member of" %} {{ membership.membership_type }}
         				</a>
                         {% else %}
                         {{ membership.member_number }} {{ membership.membership_type }}
@@ -174,32 +174,32 @@
         			</td>
         			<td>
                         {{ membership.join_dt|date:"M j, Y" }}
-                        
+
                         {% if not membership.is_pending %} - {% firstof membership.expire_dt|date:"M j, Y" "Forever" %}
 
-                        (grace period: 
+                        (grace period:
                         {{ membership.membership_type.expiration_grace_period }} days)
-                        
+
                         {% endif %}
 
                         <span class="inner-mitm">{{ membership.get_status|capfirst}}</span>
 
                         {% if membership.can_renew %}
                             {% if membership.corporate_membership_id %}
-                                <a href="{% url membership_default.add_under_corp membership.corporate_membership_id %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Renew</a>
+                                <a href="{% url 'membership_default.add_under_corp' membership.corporate_membership_id %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Renew</a>
                             {% else %}
                                 {% if membership.app %}
-                                <a href="{% url membership_default.add membership.app.slug %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Renew</a>
+                                <a href="{% url 'membership_default.add' membership.app.slug %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Renew</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
 
                         {% if user.is_superuser and membership.past_renewal %}
                             {% if membership.corporate_membership_id %}
-                                <a href="{% url membership_default.add_under_corp membership.corporate_membership_id %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Admin Renew</a>
+                                <a href="{% url 'membership_default.add_under_corp' membership.corporate_membership_id %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Admin Renew</a>
                             {% else %}
                                 {% if membership.app %}
-                                <a href="{% url membership_default.add membership.app.slug %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Admin Renew</a>
+                                <a href="{% url 'membership_default.add' membership.app.slug %}?username={{ membership.user.username }}&membership_type_id={{ membership.membership_type.pk }}">Admin Renew</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
@@ -208,7 +208,7 @@
 	        		<td>
 	        		    {% with membership.get_invoice as invoice %}
 	        			{% if invoice %}
-	        			<a href="{% url invoice.view invoice.pk %}">
+	        			<a href="{% url 'invoice.view' invoice.pk %}">
 	        				Balance {{ invoice.balance|format_currency }}
 	        			</a>
 	        			{% endif %}
@@ -222,8 +222,8 @@
     	{% endif %}
 
     </div>
-     {% endif  %}  
-        
+     {% endif  %}
+
 {% endif %}
 
     <div class="group info">
@@ -233,7 +233,7 @@
 		<a title="Join or leave group" href="{% url profile.edit_groups user_this.username %}" class="glyph gears">S</a>
 		{% endif %}
 		</h2>
-		
+
 		{% if group_memberships %}
 			<table>
 			{% for gm in group_memberships %}
@@ -259,7 +259,7 @@
 		{% endif %}
 
     </div>
-    
+
 {% if request.user == user_this or request.user.profile.is_superuser %}
     <div class="events info">
     <h2>{% trans "Upcoming Event Registrations" %}</h2>
@@ -287,7 +287,7 @@
     {% endif %}
     </div>
 {% endif %}
-    
+
 
 	{% latest_contributions user_this as contributions %}
 	{% if  contributions %}
@@ -338,7 +338,7 @@ var iconrow = new dropdown({
 </script>
 <script type="text/javascript">
     $(".app-links").hide();
-    
+
     $(".toggle-app-links").click(function(e){
         $(".app-links").toggle('slow');
         e.preventDefault();

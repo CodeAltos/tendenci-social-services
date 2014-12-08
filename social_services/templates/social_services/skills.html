@@ -43,7 +43,7 @@
     </form>
 {% else %}
     <span class="capitalize">{% trans "address" %}:</span> {{ user_this.profile.get_address }}<br><br>
-    <p><a class="capitalize" href="{% url user.skills_edit user_this.username %}">{% trans "edit this information" %}</a></p>
+    <p><a class="capitalize" href="{% url 'user.skills_edit' user_this.username %}">{% trans "edit this information" %}</a></p>
     <div class="forms">
         {{ skills_form|styled_form }}
     </div>

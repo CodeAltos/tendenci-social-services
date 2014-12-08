@@ -7,7 +7,7 @@ from form_utils.forms import BetterModelForm
 from tinymce.widgets import TinyMCE
 
 from tendenci.apps.profiles.models import Profile
-from tendenci.core.base.fields import EmailVerificationField
+from tendenci.apps.base.fields import EmailVerificationField
 
 from .models import SkillSet, ReliefAssessment, ETHNICITY_CHOICES
 
