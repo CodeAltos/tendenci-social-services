@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from tendenci.core.site_settings.utils import get_setting
+from tendenci.apps.site_settings.utils import get_setting
 from tendenci.urls import urlpatterns as tendenci_urls
 
 from .urlhelper import replace_urlpattern
