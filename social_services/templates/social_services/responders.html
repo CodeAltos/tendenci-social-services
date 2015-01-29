@@ -3,7 +3,7 @@
 {% load social_services_tags %}
 {% load i18n %}
 
-{% block title %}{{ block.super }}Responders List{% endblock %}
+{% block title %}{{ block.super }}{% trans 'Responders List' %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -13,7 +13,6 @@
 {% endblock %}
 
 {% block body %}
-{% include "social_services/nav.html" %}
 <div class="social-services-wrap t">
     <h1 class="capitalize">{% trans "responders list" %}</h1>
 
@@ -28,7 +27,7 @@
 
     {% if lon and lat %}
     <form action='' method='get'>
-        <p>Showing responders within 
+        <p>Showing responders within
         <select name="d">
             <option value="1" {% if request.GET.d == "1" %}selected{% endif %}>1</option>
             <option value="5" {% if request.GET.d == "5" %}selected{% endif %}>5</option>
@@ -41,7 +40,7 @@
         <input type="submit" value="Change"/></p>
     </form>
     {% else %}
-        <p>Showing all reponders</p>
+        <p>{% trans 'Showing all reponders' %}</p>
     {% endif %}
 
     {% autopaginate responders 20 %}

@@ -1,7 +1,7 @@
 {% extends "social_services/base-wide.html" %}
 {% load i18n %}
 
-{% block title %}{{ block.super }}Map{% endblock %}
+{% block title %}{{ block.super }}{% trans 'Map' %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block body %}
-{% include "social_services/nav.html" %}
     <h1 class="capitalize">{% trans "social services map" %}</h1>
     <p class="capitalize"><strong>{% trans "legend" %}:</strong></p>
     <ul>
