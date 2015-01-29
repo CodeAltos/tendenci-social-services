@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block body %}
-{% users_nav request.user user_this %}
 
 {% if edit_mode %}
     <h1 class="capitalize">{% trans "edit user skills" %}</h1>
@@ -38,7 +37,7 @@
     <form action="" method="post">{% csrf_token %}
         <div class="forms">
             {{ forms|styled_multi_forms }}
-            <input type="submit" value="Submit Information!"/>
+            <input type="submit" value="{% trans 'Submit Information!' %}"/>
         </div>
     </form>
 {% else %}

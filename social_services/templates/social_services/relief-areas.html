@@ -2,7 +2,7 @@
 {% load pagination_tags %}
 {% load i18n %}
 
-{% block title %}{{ block.super }}Relief Areas{% endblock %}
+{% block title %}{{ block.super }}{% trans 'Relief Areas' %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block body %}
-{% include "social_services/nav.html" %}
 <div class="social-services-wrap">
     <h1 class="capitalize">{% trans "relief assessment areas" %}</h1>
 
@@ -21,7 +20,7 @@
 
     {% if lon and lat %}
     <form action='' method='get'>
-        <p>Showing relief areas within 
+        <p>Showing relief areas within
         <select name="d">
             <option value="1" {% if request.GET.d == "1" %}selected{% endif %}>1</option>
             <option value="5" {% if request.GET.d == "5" %}selected{% endif %}>5</option>
@@ -66,17 +65,17 @@ $(document).ready(function(){
     data.push([legend[i], values[i]])
   }
   console.log(data)
-  var plot1 = jQuery.jqplot ('relief-chart', [data], 
+  var plot1 = jQuery.jqplot ('relief-chart', [data],
     { title: 'Services Needed',
       seriesDefaults: {
-        renderer: jQuery.jqplot.PieRenderer, 
+        renderer: jQuery.jqplot.PieRenderer,
         rendererOptions: {
           fill: false,
           sliceMargin: 10,
           lineWidth: 10,
           showDataLabels: true
         }
-      }, 
+      },
       legend: { show:true, location: 'e' }
     }
   );

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load styled_forms %}
 
-{% block title %}{{ block.super }}Relief Assessment Form{% endblock %}
+{% block title %}{{ block.super }}{% trans 'Relief Assessment Form' %}{% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block body %}
-{% include "social_services/nav.html" %}
 <h1 class="capitalize">{% trans "relief assessment form" %}</h1>
 <p class="capitalize">{% trans "date of visit" %}: {{ now|date:"j-F-Y P" }}</p>
 <form action="" method="post">{% csrf_token %}
