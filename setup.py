@@ -9,7 +9,7 @@ setup(
     name='tendenci-social-services',
     author='Schipul',
     author_email='programmers@schipul.com',
-    version='6.0.0',
+    version='7.0.0',
     license='GPL3',
     description='Social Services addon for Tendenci',
     long_description=longdesc,

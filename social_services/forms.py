@@ -129,12 +129,12 @@ class ReliefAssessmentForm(BetterModelForm):
     case_notes = forms.CharField(required=False,
         widget=TinyMCE(attrs={'style':'width:100%'},
         mce_attrs={'storme_app_label':ReliefAssessment._meta.app_label,
-        'storme_model':ReliefAssessment._meta.module_name.lower()}))
+        'storme_model':ReliefAssessment._meta.model_name.lower()}))
 
     items_provided = forms.CharField(required=False,
         widget=TinyMCE(attrs={'style':'width:100%'},
         mce_attrs={'storme_app_label':ReliefAssessment._meta.app_label,
-        'storme_model':ReliefAssessment._meta.module_name.lower()}))
+        'storme_model':ReliefAssessment._meta.model_name.lower()}))
 
     class Meta:
         model = ReliefAssessment

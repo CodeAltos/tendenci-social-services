@@ -10,7 +10,7 @@
 <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <h1 class="capitalize">{% trans "relief assessment form" %}</h1>
 <p class="capitalize">{% trans "date of visit" %}: {{ now|date:"j-F-Y P" }}</p>
 <form action="" method="post">{% csrf_token %}
